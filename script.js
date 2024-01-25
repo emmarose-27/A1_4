@@ -7,18 +7,18 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 $.getJSON("https://raw.githubusercontent.com/orhuna/WebGIS_SLU_M1/main/Module%201/Assignment%201/data/sf_crime.geojson",function(data){
-    var ratIcon = L.icon({
+    var SLUIcon = L.icon({
       iconUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Saint_Louis_Billikens_logo.svg/1200px-Saint_Louis_Billikens_logo.svg.png',
       iconSize: [60,60]
     });
-    var rodents = L.geoJson(data,{
+    var crime = L.geoJson(data,{
       pointToLayer: function(feature,latlng){
-        var marker = L.marker(latlng,{icon: ratIcon});
+        var marker = L.marker(latlng,{icon: SLUIcon});
         marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT + '<br/>' + feature.properties.SUBJECT);
         return marker;
       }
     });
     var clusters = L.markerClusterGroup();
-    clusters.addLayer(rodents);
+    clusters.addLayer(crime);
     map.addLayer(clusters);
 });
